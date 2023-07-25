@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
+import "./moviemodal.css"; // Import the CSS file
 
 function MovieModal({ id, onClose }) {
   const movie = useSelector((state) =>
@@ -20,37 +21,16 @@ function MovieModal({ id, onClose }) {
   }, [onClose]);
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-      }}
-    >
-      <div
-        ref={modalRef}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "white",
-          padding: "1rem",
-          maxHeight: "80vh",
-          overflowY: "scroll",
-          color: "black",
-        }}
-      >
-        <button onClick={onClose} style={{ color: "black" }}>
-          Close
+    <div className="modal-overlay">
+      <div ref={modalRef} className="modal-container">
+        <button onClick={onClose} className="modal-close-btn">
+          X
         </button>
         <h2>{movie.title}</h2>
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
+          className="modal-image"
         />
         <p>{movie.overview}</p>
         <p>Release Date: {movie.release_date}</p>

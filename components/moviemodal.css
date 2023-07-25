@@ -1,0 +1,81 @@
+/* MovieModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  position: relative;
+  background-color: white;
+  padding: 4rem;
+  max-height: 80vh;
+  overflow-y: scroll;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: modal-fade-in 0.3s;
+  width: 80%; /* Set the modal content width to 80% */
+  text-align: center; /* Center the modal content */
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: black;
+  border: none;
+  background: none;
+  font-size: 1.5rem; /* Increase the font size */
+  cursor: pointer;
+  /* Add some fancy styles for the close button */
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-close-btn:hover {
+  transform: rotate(180deg); /* Rotate the close button on hover */
+}
+
+.modal-image {
+  width: 100%;
+  max-height: 50vh; /* Reduce the image height */
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.movie-details {
+  font-size: 1.1rem; /* Increase the font size for movie details */
+  line-height: 1.6;
+}
+
+.modal-container h2 {
+  margin-bottom: 1rem;
+}
+
+.modal-container p {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}

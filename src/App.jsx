@@ -1,15 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, fetchGenres } from "../redux/movieSlice";
 
 import MovieModal from "../components/MovieModal";
-import MovieCard from "../components/MovieCard";
+import GenresList from "../components/GenresList";
+import MoviesList from "../components/MoviesList";
+import useLocalStorage from "../hooks/useLocalStorage";
+import "./App.css"; // Import the CSS file
 
 function App() {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movie.movies);
   const genres = useSelector((state) => state.movie.genres);
-  const [selectedGenreIds, setSelectedGenreIds] = useState([]);
+  const [selectedGenreIds, setSelectedGenreIds] = useLocalStorage(
+    "selectedGenres",
+    []
+  );
   const [selectedMovieId, setSelectedMovieId] = useState(null);
 
   useEffect(() => {
@@ -31,13 +37,14 @@ function App() {
   }, [selectedGenreIds]);
 
   const handleSelectGenre = (genreId) => {
-    setSelectedGenreIds((selectedGenreIds) =>
-      selectedGenreIds.includes(genreId)
-        ? selectedGenreIds.filter((id) => id !== genreId)
-        : [...selectedGenreIds, genreId]
+    setSelectedGenreIds((prevSelectedGenreIds) =>
+      prevSelectedGenreIds.includes(genreId)
+        ? prevSelectedGenreIds.filter((id) => id !== genreId)
+        : [...prevSelectedGenreIds, genreId]
     );
   };
 
+  // Filter movies based on selected genres
   const filteredMovies =
     selectedGenreIds.length === 0
       ? movies
@@ -46,32 +53,20 @@ function App() {
         );
 
   return (
-    <div>
-      <h1>Movie Recommendations</h1>
-      <h2>Select Genres</h2>
-      <ul>
-        {genres.map((genre) => (
-          <li key={genre.id}>
-            <label>
-              <input
-                type="checkbox"
-                onChange={() => handleSelectGenre(genre.id)}
-              />
-              {genre.name}
-            </label>
-          </li>
-        ))}
-      </ul>
-      <h2>Movies</h2>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {filteredMovies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            onClick={setSelectedMovieId}
-          />
-        ))}
-      </div>
+    <div className="container">
+      <h1 className="movie-recommendations">Movie Recommendations</h1>
+      <h2 className="movie-recommendations">Select Genres</h2>
+      <GenresList
+        genres={genres}
+        selectedGenreIds={selectedGenreIds}
+        handleSelectGenre={handleSelectGenre}
+      />
+
+      <MoviesList
+        movies={filteredMovies}
+        setSelectedMovieId={setSelectedMovieId}
+      />
+
       {selectedMovieId && (
         <MovieModal
           id={selectedMovieId}

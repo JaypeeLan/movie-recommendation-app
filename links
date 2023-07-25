@@ -1,4 +1,0 @@
-       "https://api.themoviedb.org/3/movie/popular?api_key=595b5cc770e3f26833fa3ec44e699a1e"
-       https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
-
-    "https://api.themoviedb.org/3/genre/movie/list?api_key=595b5cc770e3f26833fa3ec44e699a1e"

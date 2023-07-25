@@ -1,11 +1,11 @@
+import "./moviecard.css";
 function MovieCard({ movie, onClick }) {
   return (
-    <div style={{ margin: "1rem", width: "calc(25% - 2rem)" }}>
-      <button onClick={() => onClick(movie.id)} style={{ cursor: "pointer" }}>
+    <div className="movie-cards">
+      <button onClick={() => onClick(movie.id)}>
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
-          style={{ width: "100%" }}
         />
       </button>
       <h3>{movie.title}</h3>

@@ -1,0 +1,11 @@
+.movie-cards {
+  transition: transform 0.2s;
+}
+
+.movie-cards:hover {
+  transform: scale(1.05);
+}
+
+.movie-cards > * {
+  margin-bottom: 1rem;
+}
