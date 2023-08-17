@@ -5,6 +5,8 @@ const initialState = {
   movies: [],
   genres: [],
   selectedGenres: [],
+  wishList: [],
+  count: 0,
   status: "idle",
 };
 
@@ -37,6 +39,11 @@ const movieSlice = createSlice({
     setSelectedGenres(state, action) {
       state.selectedGenres = action.payload;
     },
+
+    addWishlist(state, action) {
+      state.wishList.push(action.payload);
+      state.count = state.wishList.length; // Update the count here
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,7 +63,13 @@ const movieSlice = createSlice({
   },
 });
 
-export const { selectGenre, deselectGenre, setSelectedGenres } =
-  movieSlice.actions;
+export const {
+  selectGenre,
+  deselectGenre,
+  setSelectedGenres,
+  count,
+  addWishlist,
+  addCount,
+} = movieSlice.actions;
 
 export default movieSlice.reducer;

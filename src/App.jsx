@@ -12,6 +12,9 @@ function App() {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movie.movies);
   const genres = useSelector((state) => state.movie.genres);
+  // const addWishList = useSelector((state) => state.movie.addWishList);
+  const count = useSelector((state) => state.movie.count);
+
   const [selectedGenreIds, setSelectedGenreIds] = useLocalStorage(
     "selectedGenres",
     []
@@ -56,6 +59,7 @@ function App() {
     <div className="container">
       <h1 className="movie-recommendations">Movie Recommendations</h1>
       <h2 className="movie-recommendations">Select Genres</h2>
+      <h2>WishList Count - {count}</h2>
       <GenresList
         genres={genres}
         selectedGenreIds={selectedGenreIds}
